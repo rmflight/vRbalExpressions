@@ -1,0 +1,10 @@
+Package: vRbalExpressions
+Version: 0.0.1
+Title: Verbal Expressions in R
+Author: Robert M Flight <rflight79@gmail.com>
+Maintainer: Robert M Flight <rflight79@gmail.com>
+Depends: R (>= 3.0.0)
+Description: More natural way of constructing regular expressions
+License: CC0
+URL: http://github.com/rmflight/vRbalExpressions, http://verbalexpressions.github.io
+VignetteBuilder: knitr
