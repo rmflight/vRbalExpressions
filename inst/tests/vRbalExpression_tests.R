@@ -99,5 +99,21 @@ test_that("linebreak works", {
 })
 
 test_that("br works", {
-  useExpr <- verbalExpression(startofline=NULL, then="abc", br=NULL, then)
+  useExpr <- verbalExpression(startofline=NULL, then="abc", br=NULL, then="def")
+  testString <- "abc\r\ndef"
+  expect_equivalent(1, regexpr(useExpr, testString))
+  
+  testString <- "abc\r\n def"
+  expect_equivalent(-1, regexpr(useExpr, testString))
 })
+
+test_that("tab works", {
+  useExpr <- verbalExpression(startofline=NULL, tab=NULL, then="abc")
+  
+  testString <- "\tabc"
+  expect_equivalent(1, regexpr(useExpr, testString))
+  
+  testString <- "abc"
+  expect_equivalent(-1, regexpr(useExpr, testString))
+})
+
