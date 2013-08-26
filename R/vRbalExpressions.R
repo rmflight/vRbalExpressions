@@ -84,7 +84,7 @@ somethingBut <- function(value){
 
 #' Line break
 #' @export
-linebreak <- function(){
+linebreak <- function(value){
   return("(?:(?:\\n)|(?:\\r\\n))")
 }
 
@@ -127,5 +127,6 @@ range <- function(from, to){
 #' or
 #' @export
 or <- function(value){
-  
+  tmpVal <- then(value)
+  return(paste0("|", tmpVal))
 }
