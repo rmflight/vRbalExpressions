@@ -77,5 +77,27 @@ test_that("anyOf works", {
 })
 
 test_that("or works", {
+  useExpr <- verbalExpression(startofline=NULL, then="abc", or="def")
   
+  testString <- "defzzz"
+  expect_equivalent(1, regexpr(useExpr, testString))
+  testString <- "abczzz"
+  expect_equivalent(1, regexpr(useExpr, testString))
+  
+  testString <- "xyzabc"
+  expect_equivalent(-1, regexpr(useExpr, testString))
+})
+
+test_that("linebreak works", {
+  useExpr <- verbalExpression(startofline=NULL, then="abc", linebreak=NULL, then="def")
+  
+  testString <- "abc\r\ndef"
+  expect_equivalent(1, regexpr(useExpr, testString))
+  
+  testString <- "abc\r\n def"
+  expect_equivalent(-1, regexpr(useExpr, testString))
+})
+
+test_that("br works", {
+  useExpr <- verbalExpression(startofline=NULL, then="abc", br=NULL, then)
 })

@@ -90,19 +90,19 @@ linebreak <- function(value){
 
 #' html shorthand
 #' @export
-br <- function(){
-  linebreak()
+br <- function(value){
+  linebreak(NULL)
 }
 
 #' tab
 #' @export
-tab <- function(){
+tab <- function(value){
   return("\\t")
 }
 
 #' Any alphanumeric
 #' @export
-word <- function(){
+word <- function(value){
   return("\\w+")
 }
 
