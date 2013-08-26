@@ -3,6 +3,14 @@
 #' Take a series of named arguments, and return the actual verbal expression for use with R's various regular expression functions
 #' 
 #' @export
+#' @return character string with the constructed regular expression
+#' @examples
+#' testExpr <- verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL)
+#' testWWW <- "https://www.google.com"
+#' grepl(testExpr, testWWW)
+#' 
+#' testExpr <- verbalExpression(find="bird")
+#' sub(testExpr, "duck", "Replace bird with duck")
 verbalExpression <- function(...){
   inArgs <- list(...)
   
