@@ -16,7 +16,32 @@ Port of the [verbal expressions](http://verbalexpressions.github.io/) library in
   * More tests!
     * Functions without tests: `range`, `word`
   * Sanitize inputs
+  
+## Installation
 
+```
+library(devtools)
+install_github("vRbalExpressions", "rmflight")
+library(vRbalExpressions)
+```
+
+## Examples
+
+```
+library(vRbalExpressions)
+
+testExpr <- verbalExpression(startofline=NULL,
+                             then="http",
+                             maybe="s",
+                             then="://",
+                             maybe="www.",
+                             anythingBut=" ",
+                             endofline=NULL)
+
+testWWW <- "https://www.google.com"
+
+grepl(testExpr, testWWW)
+```
 ## License
 
 CC0
