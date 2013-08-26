@@ -31,7 +31,12 @@ startofline <- function(value){
 #' look for something at the end of a line
 #' @export
 endofline <- function(value){
-  return(paste0(value, "$"))
+  if (is.null(value)){
+    outVal <- "$"
+  } else {
+    outVal <- paste0(value, "$")
+  }
+  return(outVal)
 }
 
 #' what to look for
@@ -55,7 +60,7 @@ maybe <- function(value){
 
 #' any character any number of times
 #' @export
-anything <- function(){
+anything <- function(value){
   return("(?:.*)")
 }
 
