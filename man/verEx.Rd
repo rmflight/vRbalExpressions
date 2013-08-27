@@ -15,6 +15,7 @@
 \alias{startofline}
 \alias{tab}
 \alias{then}
+\alias{verEx}
 \alias{verbalExpression}
 \alias{word}
 \title{Construct a verbal expression}
@@ -54,6 +55,8 @@
   range(from, to)
 
   or(value)
+
+  verEx(x)
 }
 \value{
   character string with the constructed regular expression
@@ -97,6 +100,9 @@
   Range
 
   or
+
+  creates an empty verbalExpression object that can be
+  added to
 }
 \examples{
 testExpr <- verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL)

@@ -175,20 +175,32 @@ or <- function(value){
 #' verEx
 #' 
 #' creates an empty verbalExpression object that can be added to
+#' @export
 verEx <- function(x){
-  UseMethod("verEx")
-} 
-
-verEx.default <- function(x){
   if (missing(x)){
     x <- ""
-  }
+  } 
   class(x) <- "vRbalExpression"
   return(x)
-}
+} 
 
 
 #' Reports whether x is a ggplot object
 #' @param x An object to test
 #' @export
 is.verEx <- function(x) inherits(x, "vRbalExpression")
+
+#' add two vRbalExpression objects together
+#' 
+#' @export
+#' @method + vRbalExpression
+"+.vRbalExpression" <- function(v1, v2){
+  if (is.verEx(v1) & is.verEx(v2)){
+    newV <- paste0(v1, v2)
+    verEx(newV)
+  } else {
+    stop("Can only add two vRbalExpression objects!", .call=FALSE)
+  }
+}
+
+"%+%" <- `+.vRbalExpression`
