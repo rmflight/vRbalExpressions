@@ -9,10 +9,6 @@ Port of the [verbal expressions](http://verbalexpressions.github.io/) library in
 
 ## Planned Improvements
 
-  * Change style to be more like [ggplot2](http://docs.ggplot2.org/current/gg-add.html)
-    * This would potentially allow recursion of functions
-    * Remove need to pass `NULL` as an argument
-    * Allow iterative construction
   * More tests!
     * Functions without tests: `range`, `word`
   * Sanitize inputs
@@ -30,13 +26,7 @@ library(vRbalExpressions)
 ```
 library(vRbalExpressions)
 
-testExpr <- verbalExpression(startofline=NULL,
-                             then="http",
-                             maybe="s",
-                             then="://",
-                             maybe="www.",
-                             anythingBut=" ",
-                             endofline=NULL)
+testExpr <- startofline() + then("http") + maybe("s") + then("://") + maybe("www.") + anythingBut(" ") + endofline()
 
 testWWW <- "https://www.google.com"
 
