@@ -49,7 +49,7 @@ test_that("endofline works", {
   testString <- "ab"
   expect_false(grepl(useExpr, testString))
   
-  useExpr <- verbalExpression(endofline="a")
+  useExpr <- endofline("a")
   testString <- "a"
   expect_true(grepl(useExpr, testString))
   

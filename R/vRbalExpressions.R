@@ -1,45 +1,3 @@
-#' Construct a verbal expression
-#' 
-#' Take a series of named arguments, and return the actual verbal expression for use with R's various regular expression functions
-#' 
-#' @export
-#' @return character string with the constructed regular expression
-#' @examples
-#' testExpr <- verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL)
-#' testWWW <- "https://www.google.com"
-#' grepl(testExpr, testWWW)
-#' 
-#' testExpr <- verbalExpression(find="bird")
-#' sub(testExpr, "duck", "Replace bird with duck")
-#' @rdname verEx
-verbalExpression <- function(...){
-  inArgs <- list(...)
-  
-  validFunctions <- ls("package:vRbalExpressions")
-  itemNames <- names(inArgs)
-  validItem <- itemNames %in% validFunctions
-  
-  inValid <- which(!validItem)
-  
-  if (length(inValid) != 0){
-    for (iI in inValid){
-      warnMessage <- paste(itemNames[iI], " is not a valid verbalExpression function, it was dropped!", sep="", collapse="")
-      warning(warnMessage, call.=FALSE)
-    }
-    inArgs <- inArgs[validItem]
-    itemNames <- itemNames[validItem]
-  }
-  
-  nItem <- length(inArgs)
-  
-  outStr <- vector("list", nItem)
-  for (iItem in 1:nItem){
-    inData <- inArgs[[iItem]]
-    outStr[[iItem]] <- eval(call(itemNames[iItem], inData))
-  }
-  return(paste0(unlist(outStr), collapse=""))
-}
-
 #' look for something at the beginning of a line
 #' 
 #' @export
@@ -175,7 +133,18 @@ or <- function(value){
 
 #' verEx
 #' 
-#' creates an empty verbalExpression object that can be added to
+#' creates an empty vRbalExpression object that can be added to
+#' 
+#' vRbalExpressions are added together by calling the various constructors. Alternatively, an empty expression can be created by the call to `verEx()`. 
+#' 
+#' @aliases vRbalExpression
+#' @rdname verEx
+#'  
+#' @examples
+#' testExpr <- startofline() + then("http") + maybe("s") + then("://") + maybe("www.") + anythingBut(" ") + endofline()
+#' testWWW <- "https://www.google.com"
+#' grepl(testExpr, testWWW)
+#' 
 #' @export
 verEx <- function(x){
   if (missing(x)){

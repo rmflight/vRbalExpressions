@@ -1,4 +1,4 @@
-\name{verbalExpression}
+\name{startofline}
 \alias{any}
 \alias{anyOf}
 \alias{anything}
@@ -15,13 +15,11 @@
 \alias{startofline}
 \alias{tab}
 \alias{then}
+\alias{vRbalExpression}
 \alias{verEx}
-\alias{verbalExpression}
 \alias{word}
-\title{Construct a verbal expression}
+\title{look for something at the beginning of a line}
 \usage{
-  verbalExpression(...)
-
   startofline(value)
 
   endofline(value)
@@ -58,14 +56,7 @@
 
   verEx(x)
 }
-\value{
-  character string with the constructed regular expression
-}
 \description{
-  Take a series of named arguments, and return the actual
-  verbal expression for use with R's various regular
-  expression functions
-
   look for something at the beginning of a line
 
   look for something at the end of a line
@@ -101,15 +92,17 @@
 
   or
 
-  creates an empty verbalExpression object that can be
-  added to
+  creates an empty vRbalExpression object that can be added
+  to
+}
+\details{
+  vRbalExpressions are added together by calling the
+  various constructors. Alternatively, an empty expression
+  can be created by the call to `verEx()`.
 }
 \examples{
-testExpr <- verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL)
+testExpr <- startofline() + then("http") + maybe("s") + then("://") + maybe("www.") + anythingBut(" ") + endofline()
 testWWW <- "https://www.google.com"
 grepl(testExpr, testWWW)
-
-testExpr <- verbalExpression(find="bird")
-sub(testExpr, "duck", "Replace bird with duck")
 }
 
