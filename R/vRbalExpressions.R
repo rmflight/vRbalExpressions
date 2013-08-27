@@ -146,13 +146,9 @@ or <- function(value){
 #' grepl(testExpr, testWWW)
 #' 
 #' @export
-verEx <- function(x){
-  if (missing(x)){
-    x <- ""
-  } 
-  class(x) <- "vRbalExpression"
-  return(x)
-} 
+verEx <- function(x = "") {
+  structure(x, class = "vRbalExpression")
+}
 
 
 #' Reports whether x is a ggplot object
@@ -165,7 +161,7 @@ is.verEx <- function(x) inherits(x, "vRbalExpression")
 #' @export
 #' @method + vRbalExpression
 "+.vRbalExpression" <- function(v1, v2){
-  if (is.verEx(v1) & is.verEx(v2)){
+  if (is.verEx(v1) && is.verEx(v2)){
     newV <- paste0(v1, v2)
     verEx(newV)
   } else {

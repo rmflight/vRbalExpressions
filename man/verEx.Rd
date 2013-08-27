@@ -54,7 +54,7 @@
 
   or(value)
 
-  verEx(x)
+  verEx(x = "")
 }
 \description{
   look for something at the beginning of a line
