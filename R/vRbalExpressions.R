@@ -15,7 +15,7 @@
 verbalExpression <- function(...){
   inArgs <- list(...)
   
-  validFunctions <- lsf.str("package:vRbalExpressions")
+  validFunctions <- ls("package:vRbalExpressions")
   itemNames <- names(inArgs)
   validItem <- itemNames %in% validFunctions
   
