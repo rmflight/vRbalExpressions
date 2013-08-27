@@ -1,7 +1,7 @@
 # testing vRbalExpressions
 
 test_that("something works", {
-  useExpr <- verbalExpression(something=NULL)
+  useExpr <- something()
   testString <- ""
   
   expect_false(grepl(useExpr, testString))
@@ -11,19 +11,19 @@ test_that("something works", {
 })
 
 test_that("anything works", {
-  useExpr <- verbalExpression(startofline=NULL, anything=NULL)
+  useExpr <- startofline() + anything()
   testString <- "what"
   expect_true(grepl(useExpr, testString))
 })
 
 test_that("anythingBut works", {
-  useExpr <- verbalExpression(startofline=NULL, anythingBut="w")
+  useExpr <- startofline() + anythingBut("w")
   testString <- "what"
   expect_true(grepl(useExpr, testString))
 })
 
 test_that("somethingBut works", {
-  useExpr <- verbalExpression(somethingBut="a")
+  useExpr <- somethingBut("a")
   testString <- ""
   expect_false(grepl(useExpr, testString))
   testString <- "b"
@@ -33,7 +33,7 @@ test_that("somethingBut works", {
 })
 
 test_that("startofline works", {
-  useExpr <- verbalExpression(startofline=NULL, then="a")
+  useExpr <- startofline() + then("a")
   testString <- "a"
   expect_true(grepl(useExpr, testString))
   
@@ -42,7 +42,7 @@ test_that("startofline works", {
 })
 
 test_that("endofline works", {
-  useExpr <- verbalExpression(find="a", endofline=NULL)
+  useExpr <- find("a") + endofline()
   testString <- "a"
   expect_true(grepl(useExpr, testString))
   
@@ -58,7 +58,7 @@ test_that("endofline works", {
 })
 
 test_that("maybe works", {
-  useExpr <- verbalExpression(startofline=NULL, then="a", maybe="b")
+  useExpr <- startofline() + then("a") + maybe("b")
   
   testString <- "acb"
   expect_true(grepl(useExpr, testString))
@@ -68,7 +68,7 @@ test_that("maybe works", {
 })
 
 test_that("anyOf works", {
-  useExpr <- verbalExpression(startofline=NULL, then="a", anyOf="xyz")
+  useExpr <- startofline() + then("a") + anyOf("xyz")
   testString <- "ay"
   expect_true(grepl(useExpr, testString))
   
@@ -77,7 +77,7 @@ test_that("anyOf works", {
 })
 
 test_that("or works", {
-  useExpr <- verbalExpression(startofline=NULL, then="abc", or="def")
+  useExpr <- startofline() + then("abc") + or("def")
   
   testString <- "defzzz"
   expect_true(grepl(useExpr, testString))
@@ -89,7 +89,7 @@ test_that("or works", {
 })
 
 test_that("linebreak works", {
-  useExpr <- verbalExpression(startofline=NULL, then="abc", linebreak=NULL, then="def")
+  useExpr <- startofline() + then("abc") + linebreak() + then("def")
   
   testString <- "abc\r\ndef"
   expect_true(grepl(useExpr, testString))
@@ -99,7 +99,7 @@ test_that("linebreak works", {
 })
 
 test_that("br works", {
-  useExpr <- verbalExpression(startofline=NULL, then="abc", br=NULL, then="def")
+  useExpr <- startofline() + then("abc") + br() + then("def")
   testString <- "abc\r\ndef"
   expect_true(grepl(useExpr, testString))
   
@@ -108,7 +108,7 @@ test_that("br works", {
 })
 
 test_that("tab works", {
-  useExpr <- verbalExpression(startofline=NULL, tab=NULL, then="abc")
+  useExpr <- startofline() + tab() + then("abc")
   
   testString <- "\tabc"
   expect_true(grepl(useExpr, testString))
@@ -117,14 +117,9 @@ test_that("tab works", {
   expect_false(grepl(useExpr, testString))
 })
 
-test_that("verbalExpression works", {
-  useExpr <- verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL)
+test_that("verEx adding works", {
+  useExpr <- startofline() + then("http") + maybe("s") + then("://") + maybe("www.") + anythingBut(" ") + endofline()
   testWWW <- "https://www.google.com"
   expect_true(grepl(useExpr, testWWW))
-  expect_warning(verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL, doesntBelong=NULL))
-})
-
-test_that("verEx adding works", {
-  useExpr <- verEx() + startofLine() + then("http") + maybe("s") + then("://") + maybe("www.") + anythingBut(" ") + endofline()
 })
 
