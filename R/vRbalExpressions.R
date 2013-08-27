@@ -69,7 +69,7 @@ endofline <- function(value){
 #' @export
 #' @rdname verEx
 then <- function(value){
-  return(paste0("(?:", value, ")"))
+  return(verEx(paste0("(?:", value, ")")))
 }
 
 #' alias for `then` for start of an expression
@@ -175,14 +175,16 @@ or <- function(value){
 #' verEx
 #' 
 #' creates an empty verbalExpression object that can be added to
-verEx <- function(){
+verEx <- function(x){
   UseMethod("verEx")
 } 
 
-verEx.default <- function(){
-  outData <- ""
-  class(outData) <- "vRbalExpression"
-  return(outData)
+verEx.default <- function(x){
+  if (missing(x)){
+    x <- ""
+  }
+  class(x) <- "vRbalExpression"
+  return(x)
 }
 
 
