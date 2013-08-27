@@ -11,6 +11,7 @@
 #' 
 #' testExpr <- verbalExpression(find="bird")
 #' sub(testExpr, "duck", "Replace bird with duck")
+#' @rdname verEx
 verbalExpression <- function(...){
   inArgs <- list(...)
   
@@ -27,6 +28,7 @@ verbalExpression <- function(...){
 #' look for something at the beginning of a line
 #' 
 #' @export
+#' @rdname verEx
 startofline <- function(value){
   if (is.null(value)){
     outval <- "^"
@@ -38,6 +40,7 @@ startofline <- function(value){
 
 #' look for something at the end of a line
 #' @export
+#' @rdname verEx
 endofline <- function(value){
   if (is.null(value)){
     outVal <- "$"
@@ -49,12 +52,14 @@ endofline <- function(value){
 
 #' what to look for
 #' @export
+#' @rdname verEx
 then <- function(value){
   return(paste0("(?:", value, ")"))
 }
 
-#' alias for then for start of an expression
+#' alias for `then` for start of an expression
 #' 
+#' @rdname verEx
 find <- function(value){
   then(value)
 }
@@ -62,78 +67,91 @@ find <- function(value){
 #' maybe something is there?
 #' 
 #' @export
+#' @rdname verEx
 maybe <- function(value){
   return(paste0("(?:", value, ")?"))
 }
 
 #' any character any number of times
 #' @export
+#' @rdname verEx
 anything <- function(value){
   return("(?:.*)")
 }
 
 #' any character any number of times BUT this
 #' @export
+#' @rdname verEx
 anythingBut <- function(value){
   return(paste0("(?:[^", value , "]*)"))
 }
 
 #' Any character at least one time
 #' @export
+#' @rdname verEx
 something <- function(value){
   return("(?:.+)")
 }
 
 #' Any character at least one time except for these characters
 #' @export
+#' @rdname verEx
 somethingBut <- function(value){
   return(paste0("(?:[^", value, "]+)"))
 }
 
 #' Line break
 #' @export
+#' @rdname verEx
 linebreak <- function(value){
   return("(?:(?:\\n)|(?:\\r\\n))")
 }
 
 #' html shorthand
 #' @export
+#' @rdname verEx
 br <- function(value){
   linebreak(NULL)
 }
 
 #' tab
 #' @export
+#' @rdname verEx
 tab <- function(value){
   return("\\t")
 }
 
 #' Any alphanumeric
 #' @export
+#' @rdname verEx
 word <- function(value){
   return("\\w+")
 }
 
 #' Any given character
 #' @export
+#' @rdname verEx
 anyOf <- function(value){
   return(paste0("[", value, "]"))
 }
 
 #' Any given character (short)
 #' @export
+#' @rdname verEx
 any <- function(value){
   anyOf(value)
 }
 
 #' Range
 #' @export
+#' @rdname verEx
 range <- function(from, to){
   return(paste0("[", from, "-", to, "]"))
 }
 
 #' or
 #' @export
+#' @rdname verEx
 or <- function(value){
   tmpVal <- then(value)
   return(paste0("|", tmpVal))
