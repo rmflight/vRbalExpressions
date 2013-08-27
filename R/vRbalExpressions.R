@@ -15,8 +15,23 @@
 verbalExpression <- function(...){
   inArgs <- list(...)
   
-  nItem <- length(inArgs)
+  validFunctions <- lsf.str("package:vRbalExpressions")
   itemNames <- names(inArgs)
+  validItem <- itemNames %in% validFunctions
+  
+  inValid <- which(!validItem)
+  
+  if (length(inValid) != 0){
+    for (iI in inValid){
+      warnMessage <- paste(itemNames[iI], " is not a valid verbalExpression function, it was dropped!", sep="", collapse="")
+      warning(warnMessage, call.=FALSE)
+    }
+    inArgs <- inArgs[validItem]
+    itemNames <- itemNames[validItem]
+  }
+  
+  nItem <- length(inArgs)
+  
   outStr <- vector("list", nItem)
   for (iItem in 1:nItem){
     inData <- inArgs[[iItem]]

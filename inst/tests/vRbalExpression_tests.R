@@ -117,3 +117,10 @@ test_that("tab works", {
   expect_false(grepl(useExpr, testString))
 })
 
+test_that("verbalExpression works", {
+  useExpr <- verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL)
+  testWWW <- "https://www.google.com"
+  expect_true(grepl(useExpr, testWWW))
+  expect_warning(verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL, doesntBelong=NULL))
+})
+
