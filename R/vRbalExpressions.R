@@ -174,3 +174,13 @@ is.verEx <- function(x) inherits(x, "vRbalExpression")
 }
 
 "%+%" <- `+.vRbalExpression`
+
+#' print vRbalExpression
+#' 
+#' @export
+#' @method print vRbalExpression
+print.vRbalExpression <- function(x){
+  x <- unclass(x)
+  print(x)
+  invisible(x)
+}

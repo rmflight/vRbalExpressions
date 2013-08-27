@@ -1,4 +1,5 @@
 S3method("+",vRbalExpression)
+S3method(print,vRbalExpression)
 export(any)
 export(anyOf)
 export(anything)
