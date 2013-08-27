@@ -171,3 +171,22 @@ or <- function(value){
   tmpVal <- then(value)
   return(paste0("|", tmpVal))
 }
+
+#' verEx
+#' 
+#' creates an empty verbalExpression object that can be added to
+verEx <- function(){
+  UseMethod("verEx")
+} 
+
+verEx.default <- function(){
+  outData <- ""
+  class(outData) <- "vRbalExpression"
+  return(outData)
+}
+
+
+#' Reports whether x is a ggplot object
+#' @param x An object to test
+#' @export
+is.verEx <- function(x) inherits(x, "vRbalExpression")
