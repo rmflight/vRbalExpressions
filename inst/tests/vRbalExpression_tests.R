@@ -124,3 +124,7 @@ test_that("verbalExpression works", {
   expect_warning(verbalExpression(startofline=NULL, then="http",maybe="s",then="://",maybe="www.",anythingBut=" ",endofline=NULL, doesntBelong=NULL))
 })
 
+test_that("verEx adding works", {
+  useExpr <- verEx() + startofLine() + then("http") + maybe("s") + then("://") + maybe("www.") + anythingBut(" ") + endofline()
+})
+
